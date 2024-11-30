@@ -1,3 +1,11 @@
 sudo -u postgres psql
 
 GRANT ALL PRIVILEGES ON DATABASE nome_do_banco TO nome_do_role
+
+# listen to port 8000, find PID and kill it
+sudo lsof -i :8000
+sudo kill -9 1234
+
+
+
+

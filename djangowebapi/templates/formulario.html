@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YangPlanet - Relatório de Viabilidade</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- <link rel="stylesheet" href="/webappdj/static/css/style.css" /> -->
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Header Layout</title>
+        <link rel="stylesheet" href="styles.css" />
+      </head>
+      <body>
+        <header class="header">
+          <div class="header-left">
+            <div class="logo">YangPlanet</div>
+          </div>
+          <nav class="header-center">
+            <ul class="nav-menu">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#process">Our Process</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+          <div class="header-right">
+            <select class="language-selector">
+              <option value="en">English</option>
+              <option value="pt">Portuguese</option>
+            </select>
+          </div>
+        </header>
+      </body>
+    </html>
+
+    <!-- <h1>Bem-vindo ao YangPlanet</h1> -->
+
+    <div
+      style="
+        min-height: 70vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, 0);
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <div class="container">
+        <div class="container-group1">
+          <div class="lado">
+            <p>
+              A <strong>YangPlaneta</strong> facilita a gestão do seu CAR com
+              este laudo💡🛠️
+            </p>
+            <p>
+              Descubra com a gente o <strong>Potencial Sustentável</strong> da
+              sua terra!🌱🚀
+            </p>
+            <p>
+              <strong>Preservar</strong> a natureza é a chave para o
+              <strong>equilíbrio</strong> ambiental.💪♻️
+            </p>
+          </div>
+
+          <form
+            id="main-form"
+            method="POST"
+            action="/relatorio/"
+            onsubmit="return handleFormSubmit(event)"
+          >
+            {% csrf_token %}
+            <h1>YangPlanet</h1>
+            <h2>Relatório de Viabilidade</h2>
+            <div class="input-group">
+              <label for="user-name">Informe seu nome</label>
+              <input
+                type="text"
+                id="user-name"
+                name="user-name"
+                required
+                placeholder="Digite seu nome"
+              />
+              <label for="user-email">Informe seu e-mail</label>
+              <input
+                type="text"
+                id="user-email"
+                name="user-email"
+                required
+                placeholder="Digite seu e-mail"
+              />
+              <label for="texto">Digite o código do imóvel</label>
+              <input
+                type="text"
+                id="texto"
+                name="texto"
+                required
+                placeholder="Digite um código CAR"
+              />
+            </div>
+            <button class="btn-relatorio" type="submit">Gerar Relatório</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <details>
+        <summary>Exemplos CAR</summary>
+        <div>
+          <p>AC-1200013-189F30BC54B14D89A90BE70A899DAC10</p>
+          <p>AL-2702801-963BEB9647634F50A781269B0EDC2A19</p>
+          <p>AM-1300144-1D2A4EC4E9EC41BCB99C017CB7D72FF1</p>
+          <p>MG-3104502-2BF0BA662BF648968D79145DEBE5CCE9</p>
+          <p>MS-5000203-031AA13EBCD441B3B98308084F5966AE</p>
+          <p>MT-5100201-46AD1CD488FB47D4AAD7C7B24F057702</p>
+          <p>SP-3500105-353B07AEA4CD4512A80CF4837D0D57DD</p>
+          <p>TO-1707306-DBBBD532BC474833A7A5FCD5277BAFD4</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- Overlay de carregamento -->
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="loading-spinner"></div>
+      <div id="loading-text" class="loading-text">
+        <p>Aguarde um momento, enquanto processamento o seu pedido...</p>
+      </div>
+      <button id="close-overlay">Fechar</button>
+    </div>
+
+    <div class="rodape">
+      <div class="rodape-sub">
+        <div class="div-hr"></div>
+        <br />
+        <p>YangPlanet&copy;2024</p>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loadingOverlay = document.getElementById("loading-overlay");
+        const closeOverlayButton = document.getElementById("close-overlay");
+        const loadingMessage = document.getElementById("loading-text");
+
+        // Função para abrir o overlay
+        function showLoadingOverlay(message) {
+          loadingMessage.textContent = message;
+          loadingOverlay.style.display = "flex";
+          loadingOverlay.style.flexFlow = "column";
+        }
+
+        // Função para fechar o overlay
+        function hideLoadingOverlay() {
+          loadingOverlay.style.display = "none";
+        }
+
+        // Fecha o overlay ao clicar no botão
+        closeOverlayButton.addEventListener("click", hideLoadingOverlay);
+
+        // Adiciona evento ao formulário para exibir o overlay
+        const form = document.querySelector("form");
+        if (form) {
+          form.addEventListener("submit", function () {
+            showLoadingOverlay(
+              "Aguarde um momento, enquanto processamento o seu pedido..."
+            );
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
