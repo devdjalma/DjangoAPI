@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['ec2-3-135-188-203.us-east-2.compute.amazonaws.com', 'localhost', '*']
+ALLOWED_HOSTS = ['ec2-3-135-188-203.us-east-2.compute.amazonaws.com', '3.135.188.203', 'localhost', '*']
 
 
 # Application definition
